@@ -1,0 +1,239 @@
+html {
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+header {
+    background-color: #00B2B3;
+}
+body {
+    color:black;
+    background-color:#00CBCC;
+    font-family:arial, sans-serif;
+    font-size:16pt;
+}
+
+/***********************************************/
+/* link styles                                 */
+/***********************************************/
+a:link {
+    color:#041EDE;
+    background-color:transparent;
+}
+
+a:hover {
+    color:#FF00FF;
+    background-color:transparent;
+}
+
+a:visited {color:black;background-color:transparent;}
+
+/***********************************************/
+/* division styles                             */
+/***********************************************/
+#banner-div {
+    text-align:center;
+    padding-bottom: 75px;
+}
+
+#page-content-div {
+    background-color: #00E5E5;
+    width: 75%;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
+
+#clear-div {
+    clear:both;
+}
+
+#left-div {
+    float:left;
+    width:20%;
+}
+
+#right-div {
+    float:right;
+    width:80%;
+}
+
+/***********************************************/
+/* Tabular layouts                             */
+/***********************************************/
+.table{
+    display: table;
+    width:100%;
+    border-collapse: collapse;
+}
+.table-row{
+    display: table-row;
+
+}
+
+.l-table-cell, .l-table-head, .r-table-cell, .r-table-head, .post-l-table-head, .post-l-table-cell, .post-r-table-head,
+.post-r-table-cell, .reverse-r-table-head, .reverse-r-table-cell, .reverse-l-table-head, .reverse-l-table-cell  {
+    display: table-cell;
+    padding:1em;
+    border: 1px solid;
+}
+.l-table-head, .r-table-head, .post-l-table-head, .post-r-table-head, .reverse-r-table-head, .reverse-l-table-head{
+    background-color: purple;
+}
+
+.l-table-cell, .l-table-head, .reverse-r-table-head, .reverse-r-table-cell {
+    width: 60%
+}
+
+.r-table-head, .r-table-cell, .reverse-l-table-head, .reverse-l-table-cell {
+    width:40%
+}
+
+.post-l-table-cell, .post-l-table-head {
+    width: 20%
+}
+
+.post-r-table-head, .post-r-table-cell {
+    width:80%
+}
+/***********************************************/
+/* paragraph styles                            */
+/***********************************************/
+.cent {
+    text-align:center;
+}
+
+.heads {
+    font-family:arial, sans-serif;
+    font-size:1.2em;
+    text-align:left;
+}
+
+.curr_page {
+    color:red;
+    font-weight:bolder;
+    text-shadow:black;
+    border:1px solid red;
+}
+
+.result {
+    color:inherit;
+    font-weight:bold;
+    text-shadow:black;
+}
+
+/***********************************************/
+/* Table style                                 */
+/***********************************************/
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th {
+    text-align:center;
+}
+
+td {
+    text-align:left;
+}
+
+table, th, td{
+    border:1px solid black;
+}
+
+/***********************************************/
+/* Form styles                                 */
+/***********************************************/
+
+form {
+    width:60%;
+    margin:0 auto;
+}
+
+label, input {
+    display:inline-block;
+}
+
+label {
+    width:30%;
+    text-align:right;
+}
+
+label + input {
+    width:30%;
+    margin:0 30% 0 1%;
+}
+
+/***********************************************/
+/* Forum Menu Styles                           */
+/***********************************************/
+h3 {margin: 0; padding: 0;}
+
+.leftside {
+    width:70%;
+}
+
+.rightside {
+    width:30%;
+}
+
+.small {
+    font-size: 75%;
+}
+
+
+/***********************************************/
+/* Navigation Bar style                        */
+/***********************************************/
+
+nav {
+    font-family:monospace;
+    width:100%;
+    background-color:cadetblue;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: cadetblue;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 26px;
+    text-decoration: none;
+}
+
+
+li a:hover {
+    background-color: #FFA3B2;
+}
+
+ul li ul {
+    visibility:hidden;
+    opacity:0;
+    position:absolute;
+    text-align: center;
+    display:none;}
+
+ul li:hover ul{
+    visibility:visible;
+    opacity:1;
+    display:block;
+}
+
+ul li ul li {
+    clear:both;
+}
+
+
+
