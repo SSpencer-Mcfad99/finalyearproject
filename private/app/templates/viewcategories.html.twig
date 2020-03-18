@@ -1,0 +1,22 @@
+{% extends 'forumbanner.html.twig' %}
+{% block content %}
+    <div id="page-content-div" class="cent">
+        <h2>{{ page_heading_2 }}</h2>
+
+        <div class="table">
+            <div class="table-row">
+                <div class="l-table-head">Topic</div>
+                <div class="r-table-head">Created At</div>
+            </div>
+
+            {% if posts %}
+            {% for post in posts %}
+            <div class="table-row">
+                <div class="l-table-cell"><h3><a href="viewposts.php?id=" . {{ post.postid }}>{{ post.postsubject }}</a></h3></div>
+                <div class="r-table-cell">{{ post.postdate}}</div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

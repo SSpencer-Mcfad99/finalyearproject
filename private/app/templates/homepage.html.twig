@@ -1,0 +1,22 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div class="cent">
+      <h2>{{ page_heading_2 }}</h2>
+      <div id="page-content-div">
+
+        <form action="{{ action }}" method="{{ method }}">
+
+          <p> Welcome to this Voting Systems Tutorial. This is a resource which allows visitors to
+          understand how different voting systems work, find out the advantages and disadvantages
+          of each voting system, and to find out how what political consequences may arise from
+          using certain voting systems.</p>
+            <br>
+            <p>You can find links to different resources at the top of the page, as well as a page
+            dedicated to reaching other resources available on the web. Also you can find more on
+            us within our About Us page.</p>
+            <br>
+            <p>We hope you find this resource useful.</p>
+        </form>
+      </div>
+    </div>
+{% endblock %}

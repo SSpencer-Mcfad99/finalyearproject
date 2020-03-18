@@ -1,0 +1,28 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <p>{{ page_text }}</p>
+
+                <label for="quizid">Quiz question is in:</label> <select id="systype">
+                    {% for quiz in quizzes %}
+                      <option value="{{ quiz.quizid }}">{{ quiz.quizname }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+				<label for="question">Question:</label> <input id="question" type="text" name="question" value="{{question.question}}" size="10" required>
+				<br>
+                <label for="choicea">Choice A:</label> <input id="choicea" type="text" name="choicea" value="{{question.choice1}}" size="10" required>
+				<label for="choiceb">Choice B:</label> <input id="choiceb" type="text" name="choiceb" value="{{question.choice2}}" size="10" required>
+				<label for="choicec">Choice C:</label> <input id="choicec" type="text" name="choicec" value="{{question.choice3}}" size="10" required>
+				<label for="choiced">Choice D:</label> <input id="choiced" type="text" name="choiced" value="{{question.choice4}}" size="10" required> 
+                <br><br>
+                <label for="answer">Correct Answer:</label><input id="answer" type="text" name="answer" value="{{question.ans}}" size="10" required> 
+                <hr>
+                <input type="submit" value="edit">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

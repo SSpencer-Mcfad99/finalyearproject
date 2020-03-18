@@ -1,0 +1,17 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <label for="question">Question:</label> <select name="question">
+                    {% for question in questions %}
+                        <option value="{{ question.questionid }}">{{ question.question }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" value="delete question">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

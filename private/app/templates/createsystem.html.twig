@@ -1,0 +1,27 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <p>{{ page_text }}</p>
+
+                <label for="sysname">Voting System Name:</label> <input id="sysname" type="text" name="sysname" size="10" required>
+                <br>
+                <label for="systype">System Type:</label> <select id="systype">
+                    {% for type in types %}
+                      <option value="{{ type.systemtypeid }}">{{ type.systemtypename }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <label for="syssum">System Summary:</label> <input id="syssum" type="text" name="syssum" size="10" required>
+                <br><br>
+
+                <label for="sysinfo">System information:</label>
+                <textarea rows = "5" cols = "50" name = "sysinfo" size="10" required></textarea>
+                <hr>
+                <input type="submit" value="send">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

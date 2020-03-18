@@ -1,0 +1,19 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <p>{{ page_text }}</p>
+
+                <label for="types">Types:</label> <select name="types">
+                    {% for type in types %}
+                        <option value="{{ type.systemtypeid }}">{{ type.systemtypename }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" value="fetch type">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

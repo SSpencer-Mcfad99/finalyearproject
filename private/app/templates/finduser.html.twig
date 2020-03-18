@@ -1,0 +1,24 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <p>{{ page_text }}</p>
+
+                <label for="sys">Users:</label> <select id="sys">
+                    {% for user in users %}
+                        <option value="{{ user.userusername }}">{{ user.userusername }}</option>
+                    {% endfor %}
+                </select>
+				<br>
+				<label for="userrole">User Role:</label> <select id="userrole">
+                        <option value="0">General</option>
+                        <option value="1">Admin</option>
+                </select>
+                <br>
+                <input type="submit" value="update role">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

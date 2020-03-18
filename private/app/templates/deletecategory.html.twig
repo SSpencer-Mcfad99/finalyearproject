@@ -1,0 +1,17 @@
+{% extends 'forumbanner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <label for="category">Category:</label> <select name="category">
+                    {% for category in categories %}
+                        <option value="{{ category.categoryid }}">{{ category.categoryname }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" value="delete category">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}
