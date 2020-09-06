@@ -1,45 +1,31 @@
-DROP DATABASE IF EXISTS votesys;
-
-CREATE DATABASE votesys;
-
-USE votesys;
-
 GRANT ALL ON votesys.* to 'votesys_user'@'localhost' IDENTIFIED BY 'votesys_user_pass';
 
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
 	userid INT(11) NOT NULL AUTO_INCREMENT,
-	userusername VARCHAR(25) UNIQUE NOT NULL,
-	userpassword VARCHAR(256) NOT NULL,
-	userrole ENUM('0','1') NOT NULL DEFAULT '0',
-	useremail VARCHAR(250) NOT NULL,
-	userfirstname VARCHAR(30) NOT NULL,
-	userlastname VARCHAR(30) NOT NULL,
-	usercreationtimestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	username VARCHAR(25) UNIQUE NOT NULL,
+	password VARCHAR(256) NOT NULL,
+	role ENUM('0','1') NOT NULL DEFAULT '0',
+	email VARCHAR(250) NOT NULL,
+	firstname VARCHAR(30) NOT NULL,
+	lastname VARCHAR(30) NOT NULL,
+	creationtimestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (userid)
 );
 
-DROP TABLE IF EXISTS userloginlogs;
+DROP TABLE IF EXISTS loginlogs;
 
-CREATE TABLE userloginlogs (
-	userloginlogsid INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE loginlogs (
+	logid INT(11) NOT NULL AUTO_INCREMENT,
 	userid INT(11) NOT NULL,
-	logincompleted BOOLEAN,
+	loginstatus BOOLEAN,
 	logintimestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (userloginlogsid),
+	PRIMARY KEY (logid),
 	FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
 DROP TABLE IF EXISTS sessions;
-
-CREATE TABLE sessions (
-	sessionid INT(11) NOT NULL AUTO_INCREMENT,
-        session_data LONGTEXT,
-	userid INT(11) NOT NULL,
-        PRIMARY KEY (sessionid),
-        FOREIGN KEY (userid) REFERENCES users(userid)
-);
 
 -- Tables for forum discussion board --
 DROP TABLE IF EXISTS categories;
@@ -58,10 +44,9 @@ CREATE TABLE posts (
   postsubject VARCHAR(255) NOT NULL,
   postdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   postcategory INT(8) NOT NULL,
-  postauthor INT(8) NOT NULL,
+  postauthor  VARCHAR(25) NOT NULL,
   PRIMARY KEY (postid),
-  FOREIGN KEY (postcategory) REFERENCES categories(categoryid) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (postauthor) REFERENCES users(userid) ON DELETE RESTRICT ON UPDATE CASCADE
+  FOREIGN KEY (postcategory) REFERENCES categories(categoryid) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS replies;
@@ -71,10 +56,9 @@ CREATE TABLE replies (
   replycontent TEXT NOT NULL,
   replydate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   replytopic INT(8) NOT NULL,
-  replyauthor INT(8) NOT NULL,
+  replyauthor VARCHAR(25)  NOT NULL,
   PRIMARY KEY (replyid),
-  FOREIGN KEY (replytopic) REFERENCES posts(postid) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (replyauthor) REFERENCES users(userid) ON DELETE RESTRICT ON UPDATE CASCADE
+  FOREIGN KEY (replytopic) REFERENCES posts(postid) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Tables for quiz section --
@@ -104,12 +88,17 @@ CREATE TABLE questions (
 
 -- Tables for voting system section --
 
+DROP TABLE IF EXISTS system_type;
+
 CREATE TABLE system_type (
   systemtypeid INT(8) NOT NULL AUTO_INCREMENT,
   systemtypename VARCHAR(255) NOT NULL,
   systemtypedesc VARCHAR(255) NOT NULL,
   PRIMARY KEY (systemtypeid)
 );
+
+
+DROP TABLE IF EXISTS voting_system;
 
 CREATE TABLE voting_system(
   systemid INT(8) NOT NULL AUTO_INCREMENT,
@@ -119,4 +108,13 @@ CREATE TABLE voting_system(
   systeminformation TEXT NOT NULL,
   PRIMARY KEY (systemid),
   FOREIGN KEY (systemtypeid) REFERENCES system_type(systemtypeid) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS glossary;
+
+CREATE TABLE glossary(
+  wordid INT(8) NOT NULL AUTO_INCREMENT,
+  word VARCHAR(255) NOT NULL,
+  worddefinition VARCHAR(255) NOT NULL,
+  PRIMARY KEY (wordid)
 );

@@ -2,11 +2,13 @@ html {
     margin:0;
     padding:0;
     border:0;
+    min-width: 0;
 }
 
 header {
     background-color: #00B2B3;
 }
+
 body {
     color:black;
     background-color:#00CBCC;
@@ -27,7 +29,9 @@ a:hover {
     background-color:transparent;
 }
 
-a:visited {color:black;background-color:transparent;}
+a:visited {
+    color:black;background-color:transparent;
+}
 
 /***********************************************/
 /* division styles                             */
@@ -38,10 +42,12 @@ a:visited {color:black;background-color:transparent;}
 }
 
 #page-content-div {
+    display: inline-block;
     background-color: #00E5E5;
     width: 75%;
     margin-left: 12.5%;
     margin-right: 12.5%;
+    overflow: auto;
 }
 
 #clear-div {
@@ -68,7 +74,6 @@ a:visited {color:black;background-color:transparent;}
 }
 .table-row{
     display: table-row;
-
 }
 
 .l-table-cell, .l-table-head, .r-table-cell, .r-table-head, .post-l-table-head, .post-l-table-cell, .post-r-table-head,
@@ -77,8 +82,12 @@ a:visited {color:black;background-color:transparent;}
     padding:1em;
     border: 1px solid;
 }
-.l-table-head, .r-table-head, .post-l-table-head, .post-r-table-head, .reverse-r-table-head, .reverse-l-table-head{
+.l-table-head, .r-table-head, .post-l-table-head, .post-r-table-head, .reverse-r-table-head, .reverse-l-table-head {
     background-color: purple;
+}
+
+.heading {
+    color: white
 }
 
 .l-table-cell, .l-table-head, .reverse-r-table-head, .reverse-r-table-cell {
@@ -122,25 +131,6 @@ a:visited {color:black;background-color:transparent;}
     text-shadow:black;
 }
 
-/***********************************************/
-/* Table style                                 */
-/***********************************************/
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-th {
-    text-align:center;
-}
-
-td {
-    text-align:left;
-}
-
-table, th, td{
-    border:1px solid black;
-}
 
 /***********************************************/
 /* Form styles                                 */
@@ -164,6 +154,8 @@ label + input {
     width:30%;
     margin:0 30% 0 1%;
 }
+
+
 
 /***********************************************/
 /* Forum Menu Styles                           */
