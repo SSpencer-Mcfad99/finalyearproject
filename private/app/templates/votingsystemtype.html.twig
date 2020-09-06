@@ -5,20 +5,20 @@
     <div id="page-content-div">
         <div class="table">
             <div class="table-row">
-                <div class="reverse-l-table-head">System Type</div>
-                <div class="reverse-r-table-head">Description</div>
+                <div class="reverse-l-table-head"><p class="heading">System Type</p></div>
+                <div class="reverse-r-table-head"><p class="heading">Description</p></div>
             </div>
 
-            {% if system_types %}
-                {% for type in system_types %}
+            {% if types %}
+                {% for type in types %}
                     <div class="table-row">
-                        <div class="reverse-l-table-cell"><a href="viewsystems.php?id">. {{ type.systemtypeid }}</a>{{ type.systemtypename }}</div>
+                        <div class="reverse-l-table-cell"><a href="viewsystems?id={{ type.systemtypeid }}">{{ type.systemtypename }}</a></div>
                         <div class="reverse-r-table-cell">{{ type.systemtypedesc }}</div>
                     </div>
                 {% endfor %}
             {% endif %}
-        </div>
 
+        </div>
     </div>
     </div>
 {% endblock %}

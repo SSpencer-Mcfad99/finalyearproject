@@ -1,6 +1,7 @@
 {% extends 'banner.html.twig' %}
 {% block content %}
     <div id="page-content-div">
+        {% if types %}
         <form action="{{ action }}" method ="{{ method }}">
             <h3>{{ page_heading_2 }}</h3>
             <fieldset>
@@ -8,7 +9,7 @@
 
                 <label for="sysname">Voting System Name:</label> <input id="sysname" type="text" name="sysname" size="10" required>
                 <br>
-                <label for="systype">System Type:</label> <select id="systype">
+                <label for="systype">System Type:</label> <select name="systype">
                     {% for type in types %}
                       <option value="{{ type.systemtypeid }}">{{ type.systemtypename }}</option>
                     {% endfor %}
@@ -23,5 +24,10 @@
                 <input type="submit" value="send">
             </fieldset>
         </form>
+        {% endif %}
+
+        {% if not types %}
+          <p>Cannot create a system without any types!</p>
+        {% endif %}
     </div>
 {% endblock %}

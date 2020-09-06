@@ -6,22 +6,26 @@
     <fieldset class="cent">
         <form action="{{ action }}" method="{{ method }}">
             <label for="first_name">First Name: </label>
-            <input id="first_name" type="text" name="first_name" size="10" value="{{ user.userfirstname }}" required>
+            <input id="first_name" type="text" name="first_name" size="10" value="{{ user.3 }}" required>
             <br>
             <label for="last_name">Last Name: </label>
-            <input id="last_name" type="text" name="last_name" size="10" value="{{ user.userlastname }}"required>
+            <input id="last_name" type="text" name="last_name" size="10" value="{{ user.4 }}"required>
             <br>
             <label for="username">Username: </label>
-            <input id="username" type="text" name="username" size="10" value="{{ user.userusername }}"required>
+            <input id="username" type="text" name="username" size="10" value="{{ user.1 }}"required>
             <br>
             <label for="email">Email address: </label>
-            <input id="email" type="text" name="email" size="10" value="{{ user.useremail }}"required>
-            <br>
+            <input id="email" type="email" name="email" size="10" value="{{ user.2 }}"required>
+            <br><br>
+            <p>Enter current password to make changes!</p>
+            <label for="cpassword">Current Password: </label>
+            <input id="cpassword" type="password" name="cpassword" size="10" required>
+            <p>You may change your password if you wish.</p>
             <label for="password">Password: </label>
-            <input id="password" type="password" name="password" size="10" required>
-            <br>
+            <input id="password" type="password" name="password" size="10">
+            <br><br>
             <label for="rpassword">Repeat Password: </label>
-            <input id="rpassword" type="password" name="rpassword" size="10" required>
+            <input id="rpassword" type="password" name="rpassword" size="10">
             <br><br>
             <input type="submit" value="Edit Details">
         </form>

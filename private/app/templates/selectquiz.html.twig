@@ -1,6 +1,7 @@
 {% extends 'banner.html.twig' %}
 {% block content %}
     <div id="page-content-div">
+        {% if quizzes %}
         <form action="{{ action }}" method ="{{ method }}">
             <h3>{{ page_heading_2 }}</h3>
             <fieldset>
@@ -13,5 +14,10 @@
                 <input type="submit" value="fetch quiz">
             </fieldset>
         </form>
+        {% endif %}
+
+        {% if not quizzes %}
+            <p>No quizzes available!</p>
+        {% endif %}
     </div>
 {% endblock %}

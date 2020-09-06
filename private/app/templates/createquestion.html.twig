@@ -1,18 +1,19 @@
 {% extends 'banner.html.twig' %}
 {% block content %}
     <div id="page-content-div">
+        {% if quizzes %}
         <form action="{{ action }}" method ="{{ method }}">
             <h3>{{ page_heading_2 }}</h3>
             <fieldset>
                 <p>{{ page_text }}</p>
 
-                <label for="quizid">Quiz question is in:</label> <select id="systype">
+                <label for="quizid">Quiz question is in:</label> <select name="quizid">
                     {% for quiz in quizzes %}
                       <option value="{{ quiz.quizid }}">{{ quiz.quizname }}</option>
                     {% endfor %}
                 </select>
                 <br>
-				<label for="question">Question:</label> <input id="question" type="text" name="sysname" size="10" required>
+				<label for="question">Question:</label> <input id="question" type="text" name="question" size="10" required>
 				<br>
                 <label for="choicea">Choice A:</label> <input id="choicea" type="text" name="choicea" size="10" required>
 				<label for="choiceb">Choice B:</label> <input id="choiceb" type="text" name="choiceb" size="10" required>
@@ -24,5 +25,10 @@
                 <input type="submit" value="add question">
             </fieldset>
         </form>
+        {% endif %}
+
+        {% if not quizzes %}
+          <p>You need to have a quiz to create some questions</p>
+        {% endif %}
     </div>
 {% endblock %}

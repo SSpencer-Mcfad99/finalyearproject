@@ -1,6 +1,7 @@
 {% extends 'banner.html.twig' %}
 {% block content %}
     <div id="page-content-div">
+        {% if questions %}
         <form action="{{ action }}" method ="{{ method }}">
             <h3>{{ page_heading_2 }}</h3>
             <fieldset>
@@ -13,5 +14,10 @@
                 <input type="submit" value="delete question">
             </fieldset>
         </form>
+        {% endif %}
+
+        {% if not questions %}
+          <p>No questions to delete</p>
+        {% endif %}
     </div>
 {% endblock %}

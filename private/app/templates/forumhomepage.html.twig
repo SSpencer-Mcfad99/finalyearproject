@@ -5,31 +5,23 @@
 
        <div class="table">
            <div class="table-row">
-               <div class="l-table-head">Categories</div>
-               <div class="r-table-head">Latest Topic</div>
+               <div class="l-table-head"><p class="heading">Categories</p></div>
+               <div class="r-table-head"><p class="heading">Latest Topic</p></div>
            </div>
-           <div class="table-row">
-               <div class="l-table-cell"><h3><a href="viewcategory.php?id=" . {{ category.categoryid }}>Category name</a></h3> {{ category.categorydescription }}</div>
-               <div class="r-table-cell"><a href="viewposts.php?id=" . {{ post.id }}>{{ post.postsubject }}</a>{{ post.postdate }}</div>
-           </div>
+           {% if categories %}
+             {% for category in categories %}
+             <div class="table-row">
+               <div class="l-table-cell"><h3><a href="vcat?id={{ category.categoryid }}">{{ category.categoryname }}</a></h3> {{ category.categorydescription }}</div>
+               <div class="r-table-cell">
+               {% for post in posts %}
+                 {% if post.categoryid == category.categoryid %}
+                   <a href="vpost?id={{ post.postid }}">{{ post.postsubject }}</a>{{ post.postdate}}
+                 {% endif %}
+               {% endfor %}
+               </div>
+             </div>
+             {% endfor %}
+           {% endif %}
        </div>
-       <fieldset>
-           <table>
-               <tr>
-                   <th>Categories</th>
-                   <th>Latest Topic</th>
-               </tr>
-               {% if categories %}
-                   {% for category in categories %}
-                       <tr>
-                           <td><h3><a href=category.php?id=" . {{ category.categoryid }}>Category name</a></h3> {{ category.categorydescription }}</td>
-                           <td><a href="viewposts.php?id=" . {{ post.id }}>{{ post.postsubject }}</a>{{ post.postdate }}</td>
-                       </tr>
-                   {% endfor %}
-               {% endif %}
-           </table>
-       </fieldset>
-
-
     </div>
 {% endblock %}
