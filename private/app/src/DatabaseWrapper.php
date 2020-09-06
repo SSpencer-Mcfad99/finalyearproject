@@ -1,43 +1,47 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: p17206266
- * Date: 06/01/2020
- * Time: 13:22
- */
 
-namespace VotingSystemsTutorial;
+namespace votingSystemTutorial;
+
+/**
+ * Class DatabaseWrapper
+ * @package votingSystemTutorial
+ */
 class DatabaseWrapper
 {
 private $database_connection_settings;
 private $db_handle;
 private $errors;
 private $prepared_statement;
-private $sql_queries;
 
-public function _construct(){
+
+public function _construct()
+{
     $database_connection_settings = null;
     $db_handle = null;
-    $errors = null;
     $prepared_statement = null;
-    $sql_queries = [];
+    $errors = [];
 }
 
 public function _destruct(){}
 
-    /**Takes passed database connection settings and copies them to local variable
-     *
-     * @param $database_connection_settings     */
+/**Takes passed database connection settings and copies them to local variable
+ *
+ * @param $database_connection_settings
+ */
 
-public function setDatabaseConnectionSettings($database_connection_settings){
+public function setDatabaseConnectionSettings($database_connection_settings)
+{
     $this->database_connection_settings = $database_connection_settings;
 }
 
-    /** '\' character in front of the PDO class name signifies that it is a globally available class
-     * and is not part of the namespace
-     * @return string
-     */
-public function makeDatabaseConnection(){
+/** '\' character in front of the PDO class name signifies that it is a globally available class
+ * and is not part of the namespace.
+ *
+ * @return string
+ */
+
+public function makeDatabaseConnection()
+{
        $pdo = false;
        $pdo_error = '';
 
@@ -62,25 +66,17 @@ public function makeDatabaseConnection(){
        return $pdo_error;
 }
 
-    /**Takes predefined SQLqueries from the SQLqueries class, it sets a retrieved SQLquery local when needed
-     *
-     * @param $sql_queries
-     */
+/**For transparency, each parameter value is bound separately to its placeholder
+ * This is not always strictly necessary.
+ *
+ * @param $query_string
+ * @param null $params
+ *
+ * @return mixed
+ */
 
-public function setSQLQueries($sql_queries){
-    $this->sql_queries = $sql_queries;
-}
-
-    /**
-     * @param $query_string
-     * @param null $params
-     *
-     * For transparency, each parameter value is bound separately to its placeholder
-     * This is not always strictly necessary.
-     *
-     * @return mixed
-     */
-public function safeQuery($query_string, $params = null) {
+public function safeQuery($query_string, $params = null)
+{
     $this->errors['db_error'] = false;
     $query_parameters = $params;
 
@@ -92,8 +88,8 @@ public function safeQuery($query_string, $params = null) {
     }
     catch (PDOException $exception_object)
     {
-        $error_message  = 'PDO Exception caught. ';
-        $error_message .= 'Error with the database access.' . "\n";
+        $error_message  = 'PDO Exception: ';
+        $error_message .= 'Error with database access.' . "\n";
         $error_message .= 'SQL query: ' . $query_string . "\n";
         $error_message .= 'Error: ' . var_dump($this->prepared_statement->errorInfo(), true) . "\n";
         $this->errors['db_error'] = true;
@@ -102,38 +98,35 @@ public function safeQuery($query_string, $params = null) {
     return $this->errors['db_error'];
 }
 
-    /**Returns the number of rows within the database
-     *
-     * @return mixed
-     */
-public function countRows(){
-    $num_rows = $this->prepared_statement->rowCount();
-    return $num_rows;
-}
-
-    /**Safely fetches a result row as an array indexed by column number
-     *
-     * @return mixed
-     */
-public function safeFetchRow(){
+/**Safely fetches a result row as an array indexed by column number.
+ *
+ * @return mixed
+ */
+public function safeFetchRow()
+{
     $record_set = $this->prepared_statement->fetch(\PDO::FETCH_NUM);
     return $record_set;
 }
 
-    /**Safely fetches a result row as an associated array using a key-value pair
-     *
-     * @return mixed
-     */
-public function safeFetchArray(){
+/**Safely fetches a result row as an associated array using a key-value pair.
+ *
+ * @return mixed
+ */
+public function safeFetchArray()
+{
     $row = $this->prepared_statement->fetch(\PDO::FETCH_ASSOC);
     $this->prepared_statement->closeCursor();
     return $row;
 }
 
-    public function safeFetchAll()
-    {
-        $result_set = $this->prepared_statement->fetchAll();
-        $this->prepared_statement->closeCursor();
-        return $result_set;
-    }
+/**Safely fetches all resulting rows.
+ *
+ * @return mixed
+ */
+public function safeFetchAll()
+{
+    $result_set = $this->prepared_statement->fetchAll();
+    $this->prepared_statement->closeCursor();
+    return $result_set;
+}
 }

@@ -1,10 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: p17206266
- * Date: 06/01/2020
- * Time: 12:58
+ * Builds up all references to every class under the src folder as well as TWIG using composer. Composer then
+ * fetches these class based upon name spaces.
  */
+
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig(
         $container['settings']['view']['template_path'],
@@ -22,82 +21,76 @@ $container['view'] = function ($container) {
 };
 
 $container['validator'] = function ($container) {
-    $validator = new \VotingSystemsTutorial\Validator();
+    $validator = new \votingSystemTutorial\Validator();
     return $validator;
 };
 
 $container['databaseWrapper'] = function ($container) {
-    $database_wrapper = new \VotingSystemsTutorial\DatabaseWrapper();
+    $database_wrapper = new \votingSystemTutorial\DatabaseWrapper();
     return $database_wrapper;
 };
 
 $container['sqlQueries'] = function ($container) {
-    $sql_queries = new \VotingSystemsTutorial\SQLQueries();
+    $sql_queries = new \votingSystemTutorial\SQLQueries();
     return $sql_queries;
 };
 
 $container['processOutput'] = function ($container) {
-    $output_processor = new \VotingSystemsTutorial\ProcessOutput();
+    $output_processor = new \votingSystemTutorial\ProcessOutput();
     return $output_processor;
 };
 
-$container['xmlParser'] = function ($container) {
-    $parser = new \VotingSystemsTutorial\XmlParser();
-    return $parser;
-};
-
-
 $container['loginModel'] = function ($container) {
-    $loginModel = new \VotingSystemsTutorial\LoginModel();
+    $loginModel = new \votingSystemTutorial\LoginModel();
     return $loginModel;
 };
 
 $container['registrationModel'] = function ($container) {
-    $regModel = new \VotingSystemsTutorial\RegistrationModel();
+    $regModel = new \votingSystemTutorial\RegistrationModel();
     return $regModel;
 };
 
 $container['bcryptWrapper'] = function ($container) {
-    $bcryptWrapper = new \VotingSystemsTutorial\BcryptWrapper();
+    $bcryptWrapper = new \votingSystemTutorial\BcryptWrapper();
     return $bcryptWrapper;
 };
 
 $container['monologWrapper'] = function ($container) {
-    $bcryptWrapper = new \VotingSystemsTutorial\MonologWrapper();
-    return $bcryptWrapper;
+    $monologWrapper = new \votingSystemTutorial\MonologWrapper();
+    return $monologWrapper;
 };
 
 $container['detailModel'] = function ($container) {
-    $detailModel = new \VotingSystemsTutorial\DetailModel();
+    $detailModel = new \votingSystemTutorial\DetailModel();
     return $detailModel;
 };
 
 $container['questionModel'] = function ($container) {
-    $questionModel = new \VotingSystemsTutorial\QuestionModel();
+    $questionModel = new \votingSystemTutorial\QuestionModel();
     return $questionModel;
 };
 
 $container['quizModel'] = function ($container) {
-    $quizModel = new \VotingSystemsTutorial\QuizModel();
+    $quizModel = new \votingSystemTutorial\QuizModel();
     return $quizModel;
 };
 
 $container['roleModel'] = function ($container) {
-    $roleModel = new \VotingSystemsTutorial\RoleModel();
+    $roleModel = new \votingSystemTutorial\RoleModel();
     return $roleModel;
 };
 
-$container['sessionModel'] = function ($container) {
-    $sessionModel = new \VotingSystemsTutorial\SessionModel();
-    return $sessionModel;
-};
-
 $container['votingSystemModel'] = function ($container) {
-    $votingSystemModel = new \VotingSystemsTutorial\VotingSystemModel();
+    $votingSystemModel = new \votingSystemTutorial\VotingSystemModel();
     return $votingSystemModel;
 };
 
 $container['forumModel'] = function ($container) {
-    $roleModel = new \VotingSystemsTutorial\ForumModel();
+    $forumModel = new \votingSystemTutorial\ForumModel();
     return $forumModel;
+};
+
+$container['glossaryModel'] = function ($container) {
+    $glossaryModel = new \votingSystemTutorial\GlossaryModel();
+    return $glossaryModel;
 };

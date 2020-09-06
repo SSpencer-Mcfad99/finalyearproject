@@ -1,15 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: p17206266
- * Date: 06/01/2020
- * Time: 13:24
- */
 
-/** Wrapper class made to make inbuilt Bcrypt functions easier
+namespace votingSystemTutorial;
+
+/**
+ * Class BCryptWrapper
+ * @package votingSystemTutorial
  *
+ * Wrapper class made to make inbuilt Bcrypt functions easier
  */
-namespace VotingSystemsTutorial;
 class BCryptWrapper
 {
 
@@ -32,7 +30,6 @@ class BCryptWrapper
 public function authenticatePassword($string_to_check, $stored_user_password_hash){
         $user_authenticated = false;
         $current_user_password = $string_to_check;
-        $stored_user_password_hash = $stored_user_password_hash;
 
     if (!empty($current_user_password) && !empty($stored_user_password_hash))
     {

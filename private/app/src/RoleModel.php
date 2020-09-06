@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: p17206266
- * Date: 08/03/2020
- * Time: 13:20
- */
 
-namespace VotingSystemsTutorial;
+namespace votingSystemTutorial;
 /**
  * Class RoleModel
- * @package VotingSystemsTutorial
+ * @package votingSystemTutorial
  *
  * Data model that deals with editing roles of users
  */
@@ -19,13 +13,9 @@ class RoleModel
     private $database_connection_settings;
     private $sql_queries;
 
-    public function __construct()
-    {
-    }
+    public function __construct(){}
 
-    public function __destruct()
-    {
-    }
+    public function __destruct(){}
 
     public function setDatabaseWrapper($database_wrapper)
     {
@@ -42,35 +32,57 @@ class RoleModel
         $this->sql_queries = $sql_queries;
     }
 
-    public function retrieveUsersFromDB($id)
+    /** Retrieves all users excluding the current user from the database.
+     *
+     * @param $username
+     * @return mixed
+     */
+    public function retrieveUsersFromDB($username)
     {
-        $this->database_wrapper->setDatabaseConnectionSettings($this->database_connection_settings);
-        $this->database_wrapper->makeDatabaseConnection();
-
         $query_string = $this->sql_queries->getMostUsers();
-        $query_params = array(':userid' => $id);
-
-        $this->database_wrapper->safeQuery($query_string, $query_params);
+        $query_params = array(':username' => $username);
+        $this->databaseConnectWithParams($query_string, $query_params);
 
         $result = $this->database_wrapper->safeFetchAll();
         return $result;
     }
 
+    /** Updates the role of a specified user.
+     *
+     * @param $id
+     * @param $role
+     * @return bool
+     */
     public function updateUserRole($id, $role): bool
     {
+        $query_string = $this->sql_queries->updateUserRole();
+        $query_params = array(':role' => $role, ':userid' => $id);
+        $result = $this->databaseConnectWithParams($query_string, $query_params);
+
+        if ($result == false)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /** Function that sets up the database connection, its settings as well as performing the query and returns the result
+     * of the query. Used by most functions in the class.
+     *
+     * @param $query_string
+     * @param $query_params
+     * @return mixed
+     */
+    public function databaseConnectWithParams($query_string, $query_params) {
         $this->database_wrapper->setDatabaseConnectionSettings($this->database_connection_settings);
         $this->database_wrapper->makeDatabaseConnection();
 
-        $query_string = $this->sql_queries->updateUserRole();
-        $query_params = array(':userid' => $id, ':userrole' => $role);
-
         $result = $this->database_wrapper->safeQuery($query_string, $query_params);
 
-        if ($result == false) {
-            return true;
-        } else {
-            return false;
-        }
+        return $result;
     }
 }
 	   

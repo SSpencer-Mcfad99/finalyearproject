@@ -1,0 +1,24 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div class="cent">
+    <h2>{{ page_heading_2 }}</h2>
+    <div id="page-content-div">
+        <div class="table">
+            <div class="table-row">
+                <div class="reverse-l-table-head"><p class="heading">System Type</p></div>
+                <div class="reverse-r-table-head"><p class="heading">Description</p></div>
+            </div>
+
+            {% if types %}
+                {% for type in types %}
+                    <div class="table-row">
+                        <div class="reverse-l-table-cell"><a href="viewsystems?id={{ type.systemtypeid }}">{{ type.systemtypename }}</a></div>
+                        <div class="reverse-r-table-cell">{{ type.systemtypedesc }}</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+    </div>
+{% endblock %}

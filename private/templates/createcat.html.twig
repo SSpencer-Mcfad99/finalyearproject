@@ -1,0 +1,17 @@
+{% extends 'forumbanner.html.twig' %}
+{% block content %}
+   <div id="page-content-div">
+    <form action="{{ action }}" method ="{{ method }}">
+        <h3>{{ page_heading_2 }}</h3>
+        <fieldset>
+            <p>{{ page_text }}</p>
+
+            <label for="catname">Category Name:</label> <input id="catname" type="text" name="catname" size="10" required>
+            <br><br>
+            <label for="catdesc">Category Description:</label> <textarea rows = "5" cols = "50" name = "catdesc" size="10" required></textarea>
+            <hr>
+            <input type="submit" value="send">
+        </fieldset>
+    </form>
+    </div>
+{% endblock %}

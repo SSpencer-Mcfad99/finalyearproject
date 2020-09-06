@@ -1,15 +1,16 @@
 <?php
 
+
 namespace votingSystemTutorial;
 
 /**
- * Class QuizModel
+ * Class GlossaryModel
  * @package votingSystemTutorial
  *
- * A data model dealing with adding, deleting, editing and retrieval of quizzes.
+ * Data model that deals with adding, deleting, editing or retrieving glossary entries.
  */
 
-class QuizModel
+class GlossaryModel
 {
     private $database_wrapper;
     private $database_connection_settings;
@@ -19,28 +20,53 @@ class QuizModel
 
     public function _destruct(){}
 
-    public function setDatabaseWrapper($database_wrapper){
+    public function setDatabaseWrapper($database_wrapper)
+    {
         $this->database_wrapper = $database_wrapper;
     }
 
-    public function setDatabaseConnectionSettings($database_connection_settings){
+    public function setDatabaseConnectionSettings($database_connection_settings)
+    {
         $this->database_connection_settings = $database_connection_settings;
     }
 
-    public function setSQLQueries($sql_queries){
+    public function setSQLQueries($sql_queries)
+    {
         $this->sql_queries = $sql_queries;
     }
 
-    /** Adds a quiz to the database.
+    /**Adds a glossary entry to the glossary.
      *
-     * @param $cleaned_quiz_name
-     * @param $cleaned_quiz_description
+     * @param $word
+     * @param $definition
      * @return bool
      */
-	public function createQuiz($cleaned_quiz_name, $cleaned_quiz_description) : bool{
-        $query_string = $this->sql_queries->createNewQuiz();
-        $query_params = array(':quizname' => $cleaned_quiz_name,':quizdescription' => $cleaned_quiz_description);
+    public function addDefinition($word, $definition) : bool
+    {
+        $query_string = $this->sql_queries->addDefinition();
+        $query_params = array(':word' => $word, ':worddefinition' => $definition);
+        $result = $this->databaseConnectWithParams($query_string, $query_params);
 
+        //switches the value of the boolean to make for a more user friendly codebase - if result is false, the query executed successfully, inverting this to true infers this better
+        if($result == false)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /** Deletes a specified glossary entry from the glossary
+     *
+     * @param $definition_id
+     * @return bool
+     */
+    public function deleteDefinition($definition_id) :bool
+    {
+        $query_string = $this->sql_queries->deleteDefinition();
+        $query_params = array(':wordid' => $definition_id);
         $result = $this->databaseConnectWithParams($query_string, $query_params);
 
         if($result == false)
@@ -51,179 +77,132 @@ class QuizModel
         {
             return false;
         }
-	}
+    }
 
-    /** Edits the name and description of a specified quiz.
+    /** Edits the details of a specified glossary entry.
      *
-     * @param $quiz_id
-     * @param $cleaned_quiz_name
-     * @param $cleaned_quiz_description
+     * @param $definition_id
+     * @param $word
+     * @param $definition
      * @return bool
      */
-	public function editQuiz($quiz_id, $cleaned_quiz_name, $cleaned_quiz_description) : bool{
-        $query_string = $this->sql_queries->updateQuiz();
-        $query_params = array(':quizid' => $quiz_id, ':quizname' => $cleaned_quiz_name, ':quizdescription' => $cleaned_quiz_description);
+    public function editDefinition($definition_id, $word, $definition) : bool
+    {
+        $query_string = $this->sql_queries->editDefinition();
+        $query_params = array(':wordid' => $definition_id, ':word' => $word, ':worddefinition' => $definition);
         $result = $this->databaseConnectWithParams($query_string, $query_params);
 
+        //switches the value of the boolean to make for a more user friendly codebase - if result is false, the query executed successfully, inverting this to true infers this better
         if($result == false)
         {
             return true;
         }
+
         else
         {
             return false;
         }
-	}
+    }
 
-    /** Deletes specified quiz from the database.
+    /** Retrieves a specified glossary entry from the database.
      *
-     * @param $quiz_id
-     * @return bool
-     */
-    public function deleteQuiz($quiz_id) : bool{
-        $query_string = $this->sql_queries->deleteQuiz();
-        $query_params = array(':quizid' => $quiz_id);
-
-        $result = $this->databaseConnectWithParams($query_string, $query_params);
-
-        if($result == false)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-	}
-
-    /** Deletes all questions within a specified quiz, preparing for quiz being deleted.
-     *
-     * @param $quiz_id
-     * @return bool
-     */
-	public function deleteQuestions($quiz_id) : bool{
-        $query_string = $this->sql_queries->deleteQuestions();
-        $query_params = array(':quizid' => $quiz_id);
-
-        $result = $this->databaseConnectWithParams($query_string, $query_params);
-        if($result == false)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-	}
-
-    /** Retrieves the details of a specified quiz from the database.
-     * @param $quiz_id
+     * @param $id
      * @return mixed
      */
-	public function getQuiz($quiz_id)
-    {
-        $query_string = $this->sql_queries->getQuiz();
-        $query_params = array(':quizid' => $quiz_id);
-        $this->databaseConnectWithParams($query_string, $query_params);
+    public function getDefinitionFromDB($id){
+        $query_string = $this->sql_queries->getDefinitionFromDB();
+        $query_params = array(':wordid' => $id);
+        $result = $this->databaseConnectWithParams($query_string, $query_params);
 
         $result = $this->database_wrapper->safeFetchRow();
         return $result;
     }
 
-    /** Retrieves all quizzes from the database.
+    /** Retrieves all glossary entries from the database.
      *
      * @return mixed
      */
-    public function retrieveQuizzesFromDB()
-    {
-        $query_string = $this->sql_queries->getQuizzes();
-        $this->databaseConnectWithoutParams($query_string);
+    public function  retrieveDefinitionsFromDB(){
+        $query_string = $this->sql_queries->retrieveDefinitionsFromDB();
+        $result = $this->databaseConnectWithoutParams($query_string);
 
         $result = $this->database_wrapper->safeFetchAll();
         return $result;
     }
 
-    /** Gets all questions from a specified quiz.
-     *
-     * @param $quizid
-     * @return mixed
-     */
-	public function retrieveQuestionsFromDB($quizid)
+    public function getDefinitions()
     {
-        $query_string = $this->sql_queries->getQuestions();
-		$query_params = array(':quizid' => $quizid);
-        $this->databaseConnectWithParams($query_string, $query_params);
+        $this->database_wrapper->setDatabaseConnectionSettings($this->database_connection_settings);
+        $this->database_wrapper->makeDatabaseConnection();
+
+        $query_string = $this->sql_queries->getDefinitions();
+
+        $this->database_wrapper->safeQuery($query_string);
 
         $result = $this->database_wrapper->safeFetchAll();
         return $result;
     }
 
-    /** Gets all questions from database.
+    /** Checks to see if a word already exists in the glossary.
      *
-     * @return mixed
-     */
-    public function retrieveQuestions()
-    {
-        $query_string = $this->sql_queries->retrieveQuestions();
-        $this->databaseConnectWithoutParams($query_string);
-
-        $result = $this->database_wrapper->safeFetchAll();
-        return $result;
-    }
-
-    /** Checks to see if name of quiz already exists.
-     *
-     * @param $quizname
+     * @param $word
      * @return bool|string
      */
-	public function doesQuizExist($quizname){
-	    $query_string = $this->sql_queries->getQuizName();
-        $query_params = array(':quizname' => $quizname);
+    public function DoesWordExist($word)
+    {
+        $query_string = $this->sql_queries->getDefinitionId();
+        $query_params = array(':word' => $word);
+
         $result = $this->databaseConnectWithParams($query_string, $query_params);
 
         if($result == true) // This signifies that there was a QUERY ERROR (meaning the query has run)
         {
             return 'Unfortunately there has been a query error';
         }
+
         else // desired behaviour for when a query has RAN SUCCESSFULLY
         {
             $result = $this->database_wrapper->safeFetchArray();
 
-            if($result != null) //if result is not null, quiz exists
+            if($result != null) //if result is not null, user exists
             {
                 return true;
             }
-            else // if result is null, quiz doesn't exist
+
+            else // if result is null, user doesn't exist
             {
                 return false;
             }
         }
-	}
+    }
 
-    /** Checks to see if quiz with the same name already exists (excludes name of quiz being updated).
+    /**Checks to see if a word already exists in the glossary (excluding the current entry being updated).
      *
-     * @param $id
-     * @param $quizname
+     * @param $definition_id
+     * @param $word
      * @return bool|string
      */
-    public function doesNewQuizExist($id, $quizname){
-        $query_string = $this->sql_queries->getNewQuizName();
-        $query_params = array(':quizid' => $id, ':quizname' => $quizname);
+    public function DoesWordsExist($definition_id, $word)
+    {
+        $query_string = $this->sql_queries->getDefinitionIds();
+        $query_params = array(':wordid' => $definition_id, ':word' => $word);
         $result = $this->databaseConnectWithParams($query_string, $query_params);
 
         if($result == true) // This signifies that there was a QUERY ERROR (meaning the query has run)
         {
             return 'Unfortunately there has been a query error';
         }
+
         else // desired behaviour for when a query has RAN SUCCESSFULLY
         {
             $result = $this->database_wrapper->safeFetchArray();
 
-            if($result != null) //if result is not null, quiz exists
+            if($result != null) //if result is not null, user exists
             {
                 return true;
             }
-            else // if result is null, quiz doesn't exist
+
+            else // if result is null, user doesn't exist
             {
                 return false;
             }

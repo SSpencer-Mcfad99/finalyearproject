@@ -1,0 +1,40 @@
+{% extends 'forumbanner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        <h2>{{ page_heading_2 }}</h2>
+
+        <div class="table">
+            <div class="table-row">
+                <div class="l-table-head"><p class="heading">Topic</p></div>
+                <div class="r-table-head"><p class="heading">Created At</p></div>
+            </div>
+
+            {% if posts %}
+            {% for post in posts %}
+            <div class="table-row">
+                <div class="l-table-cell"><h3><a href="vpost?id={{ post.postid }}">{{ post.postsubject }}</a></h3></div>
+                <div class="r-table-cell">{{ post.postdate}}</div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <br>
+        <div class="cent">
+        {% if userrole == 1 %}
+            <a href="dposts?id={{ id }}">Delete post page</a>
+            <a href="ecat?id={{ id }}">Edit Category</a>
+        {% endif %}
+        </div>
+
+        <h2>{{ page_heading_3 }}</h2>
+        <form action="{{action}}" method="{{method}}">
+            <fieldset>
+                <label for="subname">Subject:</label> <input id="subname" type="text" name="subname" size="10" required>
+                <br><br>
+                <label for="message">Message:</label> <textarea rows = "5" cols = "50" name = "message" size="10" required></textarea>
+                <hr>
+                <input type="submit" value="send">
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

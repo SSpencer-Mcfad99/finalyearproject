@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: p17206266
- * Date: 06/01/2020
- * Time: 13:23
- */
 
-namespace VotingSystemsTutorial;
+namespace votingSystemTutorial;
 class ProcessOutput
 {
     public function __construct(){}

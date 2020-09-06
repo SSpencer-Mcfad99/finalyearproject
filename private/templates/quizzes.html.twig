@@ -1,0 +1,21 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div class="cent">
+      <h2>{{ page_heading_2 }}</h2>
+        <div class="table">
+            <div class="table-row">
+                <div class="reverse-l-table-head"><p class="heading">Quiz Name</p></div>
+                <div class="reverse-r-table-head"><p class="heading">Description</p></div>
+            </div>
+
+            {% if quiz %}
+                {% for individualquiz in quiz %}
+                    <div class="table-row">
+                        <div class="reverse-l-table-cell"><a href="quizlet?id={{ individualquiz.quizid }}">{{ individualquiz.quizname }}</a></div>
+                        <div class="reverse-r-table-cell">{{ individualquiz.quizdescription }}</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

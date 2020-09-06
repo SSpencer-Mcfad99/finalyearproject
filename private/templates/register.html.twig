@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="author" content="Sam Spencer-Mcfadden" />
+    <link rel="stylesheet" href="{{ css_path }}" type="text/css"/>
+    <title>{{ page_title }}</title>
+</head>
+<body>
+    <div id="page-content-div">
+        <h2>{{ page_heading_2 }}</h2>
+        <p class="cent">{{ page_text }}</p>
+        <fieldset class="cent">
+            <form action="{{ action }}" method="{{ method }}">
+                <label for="first_name">First Name: </label><input id="first_name" type="text" name="first_name" size="10" required>
+                <br>
+                <label for="last_name">Last Name: </label><input id="last_name" type="text" name="last_name" size="10" required>
+                <br>
+                <label for="username">Username: </label><input id="username" type="text" name="username" size="10" required>
+                <br>
+                <label for="email">Email address: </label><input id="email" type="email" name="email" size="10" required>
+                <br>
+                <label for="password">Password: </label><input id="password" type="password" name="password" size="10" required>
+                <br>
+                <label for="rpassword">Repeat Password: </label><input id="rpassword" type="password" name="rpassword" size="10" required>
+                <br><br>
+                <input type="submit" value="Register">
+            </form>
+        </fieldset>
+    </div>
+</body>
+</html>

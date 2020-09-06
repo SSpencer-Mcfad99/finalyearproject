@@ -1,22 +1,16 @@
 <?php
+
+namespace votingSystemTutorial;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 /**
- * Created by PhpStorm.
- * User: p17206266
- * Date: 04/03/2020
- * Time: 11:47
+ * Performs Monolog functions, wrapped in a class and accessed by the application via the application container object
+ *
+ * Class MonologWrapper
+ * @package votingSystemTutorial
  */
-
-namespace VotingSystemsTutorial;
-
-    use Monolog\Logger;
-    use Monolog\Handler\StreamHandler;
-
-    /**
-     * Performs Monolog functions, wrapped in a class and accessed by the application via the application container object
-     *
-     * Class MonologWrapper
-     * @package SecureWebAppCoursework
-     */
 class MonologWrapper
 {
     public function __construct(){}
@@ -26,16 +20,13 @@ class MonologWrapper
     /**
      * Allows the log type to be set externally, and passed through into the application
      *
-     * @param $log_type
+     * @param $logType
      * @return int - returns selected log type in Logger format
      */
 
     public function setLogType($logType)
     {
         switch ($logType){
-            case 'debug':
-                return Logger::DEBUG;
-                break;
             case 'info':
                 return Logger::INFO;
                 break;

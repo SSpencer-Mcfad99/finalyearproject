@@ -1,0 +1,26 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div class="cent">
+        <h2>{{ page_heading_2 }}</h2>
+        <div id="page-content-div">
+            <div class="table">
+                <div class="table-row">
+                    <div class="reverse-l-table-head"><p class="heading">System</p></div>
+                    <div class="reverse-r-table-head"><p class="heading">Summary</p></div>
+                </div>
+
+                {% if systems %}
+                    {% for system in systems %}
+                        <div class="table-row">
+                            <div class="reverse-l-table-cell"><a href="viewsystem?id={{ system.systemid }}">{{ system.systemname}}</a></div>
+                            <div class="reverse-r-table-cell">{{ system.systemsummary }}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% if userrole == 1 %}
+                <a href="edittype?id={{ id }}">Edit Type</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

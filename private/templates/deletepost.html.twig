@@ -1,0 +1,23 @@
+{% extends 'forumbanner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        {% if posts %}
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <label for="posts">Posts:</label> <select name="posts">
+                    {% for post in posts %}
+                        <option value="{{ post.postid }}">{{ post.postsubject }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" value="delete post">
+            </fieldset>
+        </form>
+        {% endif %}
+
+        {% if not posts %}
+          <p>No posts to delete</p>
+        {% endif %}
+    </div>
+{% endblock %}

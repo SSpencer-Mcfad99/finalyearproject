@@ -1,0 +1,23 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        {% if type %}
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <p>{{ page_text }}</p>
+
+                <label for="typename">System Type Name:</label> <input id="typename" type="text" name="typename" size="10" value="{{ type.0 }}" required>
+                <br>
+                <label for="typedesc">System Type Description:</label> <input id="typedesc" type="text" name="typedesc" size="10" value="{{ type.1 }}" required>
+                <hr>
+                <input type="submit" value="edit">
+            </fieldset>
+        </form>
+        {% endif %}
+
+        {% if not type %}
+            <p>No types in database!</p>
+        {% endif %}
+    </div>
+{% endblock %}

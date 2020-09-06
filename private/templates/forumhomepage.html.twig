@@ -1,0 +1,27 @@
+{% extends 'forumbanner.html.twig' %}
+{% block content %}
+   <div id="page-content-div" class="cent">
+        <h2>{{ page_heading_2 }}</h2>
+
+       <div class="table">
+           <div class="table-row">
+               <div class="l-table-head"><p class="heading">Categories</p></div>
+               <div class="r-table-head"><p class="heading">Latest Topic</p></div>
+           </div>
+           {% if categories %}
+             {% for category in categories %}
+             <div class="table-row">
+               <div class="l-table-cell"><h3><a href="vcat?id={{ category.categoryid }}">{{ category.categoryname }}</a></h3> {{ category.categorydescription }}</div>
+               <div class="r-table-cell">
+               {% for post in posts %}
+                 {% if post.categoryid == category.categoryid %}
+                   <a href="vpost?id={{ post.postid }}">{{ post.postsubject }}</a>{{ post.postdate}}
+                 {% endif %}
+               {% endfor %}
+               </div>
+             </div>
+             {% endfor %}
+           {% endif %}
+       </div>
+    </div>
+{% endblock %}

@@ -1,9 +1,7 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: p17206266
- * Date: 06/01/2020
- * Time: 12:58
+ * The settings for the web application.
  */
 
 ini_set('display_errors', 'On');
@@ -13,12 +11,10 @@ define('DIRSEP', DIRECTORY_SEPARATOR);
 
 $app_url = dirname($_SERVER['SCRIPT_NAME']);
 $css_path = $app_url . '/css/style.css';
-$password_js_path = $app_url . '/js/password.js';
-$questions_js_path = $app_url . '/js/questions.js';
+$js_path = $app_url . '/js/password.js';
 
 define('CSS_PATH', $css_path);
-define('PASS_JS_PATH', $password_js_path);
-define('QUESTIONS_JS_PATH', $questions_js_path);
+define('JS_PATH', $js_path);
 define('APP_NAME', 'Voting Systems Tutorial');
 define('LANDING_PAGE', $_SERVER['SCRIPT_NAME']);
 

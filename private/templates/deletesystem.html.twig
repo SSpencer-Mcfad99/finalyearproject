@@ -1,0 +1,25 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        {% if systems %}
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <p>{{ page_text }}</p>
+
+                <label for="sys">System:</label> <select id="sys" name="sys">
+                    {% for system in systems %}
+                        <option value="{{ system.systemid }}">{{ system.systemname }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input id="system" type="submit" value="delete system">
+            </fieldset>
+        </form>
+        {% endif %}
+
+        {% if not systems %}
+          <p>No systems to delete!</p>
+        {% endif %}
+    </div>
+{% endblock %}

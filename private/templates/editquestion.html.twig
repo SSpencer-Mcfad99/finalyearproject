@@ -1,0 +1,35 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div id="page-content-div">
+        {% if question %}
+        <form action="{{ action }}" method ="{{ method }}">
+            <h3>{{ page_heading_2 }}</h3>
+            <fieldset>
+                <p>{{ page_text }}</p>
+
+                <label for="quizid">Quiz question is in:</label> <select name="quizid">
+                    {% for quiz in quizzes %}
+                      <option value="{{ quiz.quizid }}">{{ quiz.quizname }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+				<label for="question">Question:</label> <input id="question" type="text" name="question" value="{{question.1}}" size="10" required>
+				<br>
+                <label for="choicea">Choice A:</label> <input id="choicea" type="text" name="choicea" value="{{question.2}}" size="10" required>
+				<label for="choiceb">Choice B:</label> <input id="choiceb" type="text" name="choiceb" value="{{question.3}}" size="10" required>
+				<label for="choicec">Choice C:</label> <input id="choicec" type="text" name="choicec" value="{{question.4}}" size="10" required>
+				<label for="choiced">Choice D:</label> <input id="choiced" type="text" name="choiced" value="{{question.5}}" size="10" required>
+                <br><br>
+                <label for="answer">Correct Answer:</label><input id="answer" type="text" name="answer" value="{{question.6}}" size="10" required>
+                <hr>
+                <input type="submit" value="edit">
+            </fieldset>
+        </form>
+        {% endif %}
+
+        {% if not question %}
+          <p>No question loaded!</p>
+        {% endif %}
+
+    </div>
+{% endblock %}
